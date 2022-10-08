@@ -14,6 +14,9 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIE_BY_ID', fetchMovieById);
+    yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }
 
 function* fetchAllMovies() {
@@ -29,6 +32,37 @@ function* fetchAllMovies() {
         
 }
 
+function* fetchMovieById(action) {
+    try {
+        const movie = yield axios.get(`/api/movie/${action.payload}`);
+        console.log('get single: ', movie.data);
+        yield put({ type: 'SET_DETAIL_MOVIE', payload: movie.data });
+    } catch (err) {
+        console.log('Error in getting movie by id: ', err);
+    }
+}
+
+function* addMovie(action) {
+    try {
+        console.log(action.payload);
+        yield axios.post(`api/movie`, action.payload);
+        yield put({ type: 'FETCH_MOVIES' });
+    } catch (err) {
+        console.log('Error in POST new movie ', err);
+    }
+}
+
+function* fetchAllGenres() {
+    // get all genres from the DB
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('this is get all genres: ', genres);
+        yield put({ type: 'SET_GENRES', payload: genres.data });
+    } catch (err) {
+        console.log('Error in getting genres: ', err);
+    }
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -38,6 +72,15 @@ const movies = (state = [], action) => {
         case 'SET_MOVIES':
             return action.payload;
         default:
+            return state;
+    }
+}
+
+const singleMovie = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_DETAIL_MOVIE':
+            return action.payload;
+        default: 
             return state;
     }
 }
@@ -57,6 +100,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        singleMovie
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
