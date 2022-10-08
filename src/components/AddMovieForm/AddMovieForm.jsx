@@ -16,7 +16,17 @@ function AddMovieForm() {
         dispatch({ type: 'FETCH_GENRES' })
     }, []);
 
-    const handleSave = () => {
+    const checkInputs = () => {
+        if (!title || !posterUrl || !description || !movieGenre) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        if (checkInputs()) {
         dispatch({
             type: 'ADD_MOVIE',
             payload: {
@@ -32,10 +42,12 @@ function AddMovieForm() {
         setMovieGenre([]);
         dispatch({ type: 'FETCH_MOVIES'});
         history.push('/'); 
+        }
     }
     // clears local state and moves user to home page ('/')
     // on click of cancel button
-    const handleCancel = () => {
+    const handleCancel = (e) => {
+        e.preventDefault();
         setTitle('');
         setPosterUrl('');
         setDescription('');
@@ -45,7 +57,7 @@ function AddMovieForm() {
 
     const handleGenres = (e) => {
         let arr = [...movieGenre];
-        if (arr.some(genre => genre === e.target.value)) {
+        if (arr.some(genre => genre === e.target.value) || e.target.value === 'Please select one...') {
             return;
         }
         arr.push(e.target.value);
@@ -56,19 +68,21 @@ function AddMovieForm() {
     return (
         <div className="addMovieForm">
             <h2>Add Movie Form</h2>
-            <input onChange={e => setTitle(e.target.value)} placeholder='Title' value={title} />
-            <input onChange={e => setPosterUrl(e.target.value)} placeholder='Poster URL' value={posterUrl} />
-            <textarea onChange={e => setDescription(e.target.value)} placeholder='Description' value={description} />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
-            {genres.length > 0 && <select onChange={(e) => handleGenres(e)}>
+            <form>
+            <input onChange={e => setTitle(e.target.value)} placeholder='Title' value={title} required/><br />
+            <input onChange={e => setPosterUrl(e.target.value)} placeholder='Poster URL' value={posterUrl} required/><br />
+            <textarea onChange={e => setDescription(e.target.value)} placeholder='Description' value={description} required/><br />
+            {genres.length > 0 && <select onChange={(e) => handleGenres(e)} required>
                                     <option>Please select one...</option>
                                     {genres.map((genre, i) => <option value={genre.id} key={i}>{genre.name}</option>)}
-                                </select>}
+                                </select>}<br />
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
             <p>{title}</p>
             <p>{posterUrl}</p>
             <p>{description}</p>
-            {movieGenre.length > 0 && movieGenre.map((genre, index) => <p key={index}>{genre}</p>)}
+            {movieGenre.length > 0 && movieGenre.map((genre, index) => <p key={index}>{genres[genre-1].name}</p>)}
+            </form>
         </div>
     )
 }
