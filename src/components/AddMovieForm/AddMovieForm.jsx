@@ -17,7 +17,21 @@ function AddMovieForm() {
     }, []);
 
     const handleSave = () => {
-
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: {
+                title,
+                posterUrl,
+                description,
+                movieGenre
+            }
+        })
+        setTitle('');
+        setPosterUrl('');
+        setDescription('');
+        setMovieGenre([]);
+        dispatch({ type: 'FETCH_MOVIES'});
+        history.push('/'); 
     }
     // clears local state and moves user to home page ('/')
     // on click of cancel button
@@ -25,6 +39,7 @@ function AddMovieForm() {
         setTitle('');
         setPosterUrl('');
         setDescription('');
+        setMovieGenre([]);
         history.push('/');
     }
 
@@ -48,7 +63,7 @@ function AddMovieForm() {
             <button onClick={handleCancel}>Cancel</button>
             {genres.length > 0 && <select onChange={(e) => handleGenres(e)}>
                                     <option>Please select one...</option>
-                                    {genres.map((genre, i) => <option key={i}>{genre.name}</option>)}
+                                    {genres.map((genre, i) => <option value={genre.id} key={i}>{genre.name}</option>)}
                                 </select>}
             <p>{title}</p>
             <p>{posterUrl}</p>
