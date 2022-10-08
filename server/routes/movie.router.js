@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
-
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
     .then( result => {
@@ -14,6 +13,21 @@ router.get('/', (req, res) => {
       res.sendStatus(500)
     })
 
+});
+
+router.get('/:id', (req, res) => {
+  let id = req.params.id;
+  const query = `SELECT * FROM "movies" 
+                JOIN "movies_genres" ON "movies_genres"."movie_id"="movies"."id"
+                JOIN "genres" ON "genres"."id"="movies_genres"."genre_id"
+                WHERE "movies"."id"=$1`
+  pool.query(query, [id]).then(result => {
+    console.log('This is results.rows from single GET: ', result.rows);
+    res.send(result.rows);
+  }).catch(err => {
+    console.log('ERROR: Get single movie', err);
+    res.sendStatus(500)
+  })
 });
 
 router.post('/', (req, res) => {
