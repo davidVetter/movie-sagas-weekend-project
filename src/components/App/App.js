@@ -8,8 +8,9 @@ import EditMovieForm from '../EditMovieForm/EditMovieForm';
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <h1>Only Movies You Need</h1>
       <Router> 
+        <div className='navlinks'>
           <NavLink
             to="/"
             exact
@@ -21,7 +22,8 @@ function App() {
             exact
           >
             Add Movie
-          </NavLink>        
+          </NavLink>  
+        </div>      
         <Route path="/" exact>
           <MovieList />
         </Route>

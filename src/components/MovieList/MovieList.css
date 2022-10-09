@@ -1,38 +1,87 @@
 .movies {
     display : grid;
     grid-template-columns: auto auto auto auto auto;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    column-gap: 1%;
-    row-gap: 0.5%;
+    column-gap: 20px;
+    row-gap: 25px;
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 10%;
 }
 
-@media only screen and (max-width: 1200px) {
+.imgCard {
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.posterImg {
+    height: 250px;
+    margin: 10px;
+
+}
+
+@media only screen and (max-width: 1230px) {
     .movies {
         grid-template-columns: auto auto auto auto;
-        column-gap: 5px;
-        width: 100vw;
+        column-gap: 10px;
+        width: 100%;
         padding: 5px;
+    }
+  }
+
+  @media only screen and (max-width: 835px) {
+    .movies {
+        grid-template-columns: auto auto auto;
+        box-sizing: border-box;
+        column-gap: 0px;
+        row-gap: 15px;
     }
   }
 
 @media only screen and (max-width: 760px) {
     .movies {
         grid-template-columns: auto auto auto;
+        box-sizing: border-box;
+        column-gap: 0px;
+    }
+
+    .posterImg {
+        height: 225px;
+        margin: 2px;
+    
     }
   }
 
 @media only screen and (max-width: 500px) {
     .movies {
         grid-template-columns: auto auto;
+        width: 100%;
+        margin: 0;
+    }
+    .posterImg {
+        width: 80%;
+        height: auto;
+        margin: 0;
+    
     }
   }
 
   @media only screen and (max-width: 300px) {
     .movies {
         grid-template-columns: auto;
+    }
+    .posterImg {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    
     }
   }
 
@@ -42,4 +91,5 @@
         padding: 0;
         width: 100%;
     }
+
   }
