@@ -30,6 +30,20 @@ router.get('/:id', (req, res) => {
   })
 });
 
+router.put('/:id', (req, res) => {
+  const movie = req.body;
+  const query = `UPDATE "movies" SET "title"=$1, "poster"=$2, "description"=$3 WHERE "id"=$4;`;
+
+  pool.query(query, [movie.title, movie.poster, movie.description, req.params.id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('error in PUT: ', error);
+        res.sendStatus(500);
+      });
+});
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
