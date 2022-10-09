@@ -15,54 +15,61 @@ function AddMovieForm() {
     useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' })
     }, []);
-
+    // This function determines if the inputs are empty of not
     const checkInputs = () => {
-        if (!title || !posterUrl || !description || !movieGenre) {
+        if (!title.trim() || !posterUrl.trim() || !description.trim() || !movieGenre) {
             return false;
         } else {
             return true;
         }
     }
-
+    // Handles when save button is clicked
+    // validates inputs, then sends data from inputs to sagas
+    // to be put in the database
+    // clears local state, updates current movie store and moves
+    // user back to home page with updated movies
     const handleSave = (e) => {
         e.preventDefault();
         if (checkInputs()) {
         dispatch({
-            type: 'ADD_MOVIE',
-            payload: {
+            type: 'ADD_MOVIE', // saga that add a movie to db
+            payload: { // sends data from inputs to sagas
                 title,
                 posterUrl,
                 description,
                 movieGenre
             }
         })
-        setTitle('');
+        setTitle(''); // clears local state
         setPosterUrl('');
         setDescription('');
-        setMovieGenre([]);
-        dispatch({ type: 'FETCH_MOVIES'});
-        history.push('/'); 
+        setMovieGenre([]); 
+        dispatch({ type: 'FETCH_MOVIES'}); // update current movies store
+        history.push('/'); // move user
         }
     }
     // clears local state and moves user to home page ('/')
     // on click of cancel button
     const handleCancel = (e) => {
         e.preventDefault();
-        setTitle('');
+        setTitle(''); // clear local state
         setPosterUrl('');
         setDescription('');
         setMovieGenre([]);
-        history.push('/');
+        history.push('/'); // move user
     }
 
+    // This gets handles selecting multiple genres for the movie being added
+    // It validates against the same genre being added multiple times and from the 
+    // default select message from being added as genre
     const handleGenres = (e) => {
-        let arr = [...movieGenre];
+        let arr = [...movieGenre]; // make copy of current genres
         if (arr.some(genre => genre === e.target.value) || e.target.value === 'Please select one...') {
             return;
         }
-        arr.push(e.target.value);
-        console.log('this is arr: ', arr);
-        setMovieGenre(arr);
+        arr.push(e.target.value); // pushes current selection to copy of genre array
+        // console.log('this is arr: ', arr);
+        setMovieGenre(arr); // updates local state with new array of genres
     }
 
     return (

@@ -11,6 +11,7 @@ function EditMovieForm() {
     const history = useHistory();
     // allows reading of the current url
     let location = useLocation();
+
     // This keeps movieId current if the user types a new id
     // in the browser address bar and presses enter
     useEffect(() => {
@@ -27,12 +28,25 @@ function EditMovieForm() {
         // console.log('this is movie after a url change: ', movie);
     },[location.pathname]) // this useEffect runs whenever the url is changed
 
+    // Handles when save button is clicked
+    // validates title and description
+    // sends object of movie data to update that movies current
+    // entry in the database based on movie id
+    // clears local state and moves user to home page
     const handleSave = () => {
+        let movieTitle = title;
+        let movieDescription = description;
+        if (!title.trim()) {
+            movieTitle = movie[0].title;
+        }
+        if (!description.trim()) {
+            movieDescription = movie[0].description;
+        }
         dispatch({
             type: 'UPDATE_MOVIE',
             payload: {
-                title,
-                description,
+                title: movieTitle,
+                description: movieDescription,
                 id: location.pathname.match(/\d+/g)
             }
         });
@@ -41,6 +55,8 @@ function EditMovieForm() {
         history.push('/');
     }
 
+    // Handles when cancel button is clicked
+    // clears local state and moves user back to home page
     const handleCancel = () => {
         setTitle('');
         setDescription('');
@@ -52,12 +68,15 @@ function EditMovieForm() {
         <h2>Edit Page</h2>
         {console.log("This is movie: ", movie, 'This is title: ', title)}
         {console.log('This is description: ', description)}
+        {/* Conditionally renders the details and inputs of the movie to edit
+        based on if there is a movie currently in the singleMovie store */}
         {movie.length > 0 ? (
           <div key={movie[0].id} className="movieEditInnerDiv">
             <label>Title:
             <input value={title || movie[0].title} onChange={e => setTitle(e.target.value)}/>
             </label><br />
             <img src={movie[0].poster} alt={movie[0].title} />
+            {/* Displays all genres for the movie if there is more than one */}
             <div className="genreDiv">
               {movie.map((genre) => {
                 return <h4 key={genre.id}>{genre.name}</h4>;

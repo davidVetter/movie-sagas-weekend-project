@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// This GET returns all the movies currently in DB
 router.get('/', (req, res) => {
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
 
 });
 
+// This GET returns a single movie based on id with all the genres and movie details
 router.get('/:id', (req, res) => {
   let id = req.params.id;
   const query = `SELECT * FROM "movies" 
@@ -30,6 +32,7 @@ router.get('/:id', (req, res) => {
   })
 });
 
+// This PUT will update a single movie's title and description based on movie id
 router.put('/:id', (req, res) => {
   console.log('In the PUT with req.body: ', req.body, 'this is params: ', req.params.id);
   const movie = req.body;
@@ -45,6 +48,9 @@ router.put('/:id', (req, res) => {
       });
 });
 
+// This POST add a new movie to the db
+// This POST will first add the movie to the "movies" table, then add
+// an entry for each genre the movie has to the 'movies_genres' junction table
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
