@@ -31,10 +31,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  console.log('In the PUT with req.body: ', req.body, 'this is params: ', req.params.id);
   const movie = req.body;
-  const query = `UPDATE "movies" SET "title"=$1, "poster"=$2, "description"=$3 WHERE "id"=$4;`;
+  const query = `UPDATE "movies" SET "title"=$1, "description"=$2 WHERE "id"=$3;`;
 
-  pool.query(query, [movie.title, movie.poster, movie.description, req.params.id])
+  pool.query(query, [movie.title, movie.description, req.params.id])
       .then((result) => {
         res.sendStatus(200);
       })
