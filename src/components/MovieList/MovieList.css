@@ -1,4 +1,45 @@
 .movies {
-    display : flex;
-    flex-wrap: wrap;
+    display : grid;
+    grid-template-columns: auto auto auto auto auto;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1%;
+    row-gap: 0.5%;
+    width: 80%;
+    margin: 0 auto;
 }
+
+@media only screen and (max-width: 1200px) {
+    .movies {
+        grid-template-columns: auto auto auto auto;
+        column-gap: 5px;
+        width: 100vw;
+        padding: 5px;
+    }
+  }
+
+@media only screen and (max-width: 760px) {
+    .movies {
+        grid-template-columns: auto auto auto;
+    }
+  }
+
+@media only screen and (max-width: 500px) {
+    .movies {
+        grid-template-columns: auto auto;
+    }
+  }
+
+  @media only screen and (max-width: 300px) {
+    .movies {
+        grid-template-columns: auto;
+    }
+  }
+
+  @media only screen and (max-width: 220px) {
+    .movies {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+  }

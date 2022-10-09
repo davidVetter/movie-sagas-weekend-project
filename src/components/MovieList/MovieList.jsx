@@ -20,7 +20,7 @@ function MovieList() {
     // movie currently in the movie store
     // each img can be clicked and the user moved to that movie's details page
     return (
-        <main>
+        <main className='mainSection'>
             <h1>MovieList</h1>
             <section className="movies">
                 {movies.map(movie => {

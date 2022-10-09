@@ -1,4 +1,4 @@
-import {HashRouter as Router, Route} from 'react-router-dom';
+import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import './App.css';
 import MovieList from '../MovieList/MovieList'
 import DetailsPage from '../DetailsPage/DetailsPage';
@@ -9,7 +9,19 @@ function App() {
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
-      <Router>        
+      <Router> 
+          <NavLink
+            to="/"
+            exact
+          >
+            Home
+          </NavLink>&nbsp;
+          <NavLink
+            to="/addmovie"
+            exact
+          >
+            Add Movie
+          </NavLink>        
         <Route path="/" exact>
           <MovieList />
         </Route>
