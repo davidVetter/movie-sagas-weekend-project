@@ -35,6 +35,7 @@ function DetailsPage() {
             </div>
             <p>{movie[0].description}</p>
             <button onClick={() => history.push("/")}>Home Page</button>
+            <button onClick={() => history.push(`/editmovie/${location.pathname.match(/\d+/g)}`)}>Edit Movie</button>
           </div>
         ) : (
           <div>

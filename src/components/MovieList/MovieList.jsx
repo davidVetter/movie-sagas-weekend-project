@@ -7,17 +7,20 @@ function MovieList() {
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
-
+    // Fetches current movies on page load
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    // This funciton moves the user to the details page for the movie they selected
     const handleClick = (id) => {
         history.push(`/details/${id}`);
     }
-
+    // Render a collection of div elements the contain a title and img for each
+    // movie currently in the movie store
+    // each img can be clicked and the user moved to that movie's details page
     return (
-        <main>
+        <main className='mainSection'>
             <h1>MovieList</h1>
             <section className="movies">
                 {movies.map(movie => {

@@ -1,7 +1,14 @@
 .App {
   text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
+body {
+  margin: 0;
+}
 
 .App-header {
   background-color: #222;
@@ -16,6 +23,15 @@
 
 .App-intro {
   font-size: large;
+}
+
+.mainSection {
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {

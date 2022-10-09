@@ -16,6 +16,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_MOVIE_BY_ID', fetchMovieById);
     yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('UPDATE_MOVIE', updateMovie);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }
 
@@ -49,6 +50,20 @@ function* addMovie(action) {
         yield put({ type: 'FETCH_MOVIES' });
     } catch (err) {
         console.log('Error in POST new movie ', err);
+    }
+}
+
+function* updateMovie(action) {
+    try {
+        console.log('this is action.payload for updateMovie: ', action.payload);
+        yield axios.put(`/api/movie/${action.payload.id}`, 
+        {
+            title: action.payload.title,
+            description: action.payload.description
+        });
+        yield put({ type: 'FETCH_MOVIES' });
+    } catch (err) {
+        console.log('error in PUT movie ', err);
     }
 }
 
