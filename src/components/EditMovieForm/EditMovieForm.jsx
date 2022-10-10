@@ -125,7 +125,7 @@ function EditMovieForm() {
             {movie[0].genre_id &&
             <div className="genreDiv">
               <div className="genreInnerDiv">
-                {console.log('This is movie: ', movie)}
+                {/* {console.log('This is movie: ', movie)} */}
                 {movie.map((genre, index) => {  
                 genreCount != movie.length && setGenreCount(movie.length);
                   return (

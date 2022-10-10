@@ -21,7 +21,7 @@
     margin-bottom: 10px;
     box-shadow: 0 0 10px #cbbaed, 3px 3px 5px black;
     cursor: pointer;
-    width: 15vw;
+    width: 300px;
 }
 
 .imgCard:hover {
@@ -52,9 +52,6 @@
         column-gap: 0px;
         row-gap: 15px;
     }
-    .imgCard {
-        width: 100%
-    }
   }
 
 @media only screen and (max-width: 760px) {
@@ -68,6 +65,9 @@
         height: 225px;
         margin: 2px;
     
+    }
+    .imgCard {
+        width: 200px;
     }
   }
 
