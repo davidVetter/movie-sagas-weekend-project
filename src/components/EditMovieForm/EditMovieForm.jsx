@@ -8,6 +8,7 @@ function EditMovieForm() {
     const movie = useSelector((store) => store.singleMovie);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [genreCount, setGenreCount] =  useState(0);
     const dispatch = useDispatch();
     const history = useHistory();
     // allows reading of the current url
@@ -71,6 +72,9 @@ function EditMovieForm() {
     }
 
     const handleRemove = (movieid, genreid) => {
+        if (genreCount <= 1) {
+            return;
+        }
         swal({ // Sweet alert for delete confirmation
             title: "Remove Genre?",
             text: "Are you sure you want to remove this genre? (cannot be undone)",
@@ -97,8 +101,8 @@ function EditMovieForm() {
     return (
       <div className="movieEditDiv">
         <h2>Edit Page</h2>
-        {console.log("This is movie: ", movie, "This is title: ", title)}
-        {console.log("This is description: ", description)}
+        {/* {console.log("This is movie: ", movie, "This is title: ", title)} */}
+        {/* {console.log("This is description: ", description)} */}
         {/* Conditionally renders the details and inputs of the movie to edit
         based on if there is a movie currently in the singleMovie store */}
         {movie.length > 0 ? (
@@ -118,12 +122,15 @@ function EditMovieForm() {
               alt={movie[0].title}
             />
             {/* Displays all genres for the movie if there is more than one */}
+            {movie[0].genre_id &&
             <div className="genreDiv">
               <div className="genreInnerDiv">
-                {movie.map((genre, index) => {
+                {console.log('This is movie: ', movie)}
+                {movie.map((genre, index) => {  
+                genreCount != movie.length && setGenreCount(movie.length);
                   return (
                     <span key={index} className="genreSpan">
-                      {console.log("this is index: ", index)}
+                      {/* {console.log("this is index: ", index)} */}
                       {index > 0 && <p>|</p>}
                       <h4
                         onClick={() =>
@@ -138,7 +145,7 @@ function EditMovieForm() {
                   );
                 })}
               </div>
-            </div>
+            </div>}
             <div className="editDescriptionDiv">
               <div className="innerEditDescription">
                 <p className="descriptionHead">Description:</p>

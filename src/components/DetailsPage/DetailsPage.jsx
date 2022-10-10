@@ -26,7 +26,7 @@ function DetailsPage() {
 
     return (
       <div className="movieDetailDiv">
-        {console.log("This is movie: ", movie)}
+        {/* {console.log("This is movie: ", movie)} */}
         {/* Conditionally render movie details or message that results can't be found */}
         {movie.length > 0 ? (
           <div key={movie[0].id} className="movieDetailInnerDiv">
@@ -64,19 +64,20 @@ function DetailsPage() {
                 <NavigateNext />
               </p>
             </div>
+            {movie[0].genre_id &&
             <div className="genreDiv">
               <div className="genreInnerDiv">
                 {movie.map((genre, index) => {
                   return (
                     <span key={index} className="genreSpan">
-                        {console.log('this is index: ', index)}
+                        {/* {console.log('this is index: ', index)} */}
                         {index > 0 && <p>|</p>}
                         <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>
                     </span>
                     );
                 })}
               </div>
-            </div>
+            </div>}
             <p className="detailsDescriptionBlock">{movie[0].description}</p>
             <button onClick={() => history.push("/")}>Home Page</button>&nbsp;
             <button

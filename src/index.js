@@ -41,7 +41,7 @@ function* fetchAllMovies() {
 function* fetchMovieById(action) {
     try {
         const movie = yield axios.get(`/api/movie/${action.payload}`);
-        console.log('get single: ', movie.data);
+        // console.log('get single: ', movie.data);
         yield put({ type: 'SET_DETAIL_MOVIE', payload: movie.data });
     } catch (err) {
         console.log('Error in getting movie by id: ', err);
@@ -51,7 +51,7 @@ function* fetchMovieById(action) {
 // This saga will add a new movie to the database
 function* addMovie(action) {
     try {
-        console.log(action.payload);
+        // console.log(action.payload);
         yield axios.post(`api/movie`, action.payload);
         yield put({ type: 'FETCH_MOVIES' });
     } catch (err) {
@@ -62,7 +62,7 @@ function* addMovie(action) {
 // this saga will update a movie's title and description
 function* updateMovie(action) {
     try {
-        console.log('this is action.payload for updateMovie: ', action.payload);
+        // console.log('this is action.payload for updateMovie: ', action.payload);
         yield axios.put(`/api/movie/${action.payload.id}`, 
         {
             title: action.payload.title,
@@ -76,7 +76,7 @@ function* updateMovie(action) {
 
 function* removeGenre(action) {
     try {
-        console.log('This is action.payload in removeCategory: ', action.payload);
+        // console.log('This is action.payload in removeCategory: ', action.payload);
         yield axios.delete(`api/movie/${action.payload.movieid}/${action.payload.genreid}`);
         yield put({ type: 'FETCH_MOVIE_BY_ID', payload: action.payload.movieid });
     } catch (err) {
@@ -88,7 +88,7 @@ function* fetchAllGenres() {
     // get all genres from the DB
     try {
         const genres = yield axios.get('/api/genre');
-        console.log('this is get all genres: ', genres);
+        // console.log('this is get all genres: ', genres);
         yield put({ type: 'SET_GENRES', payload: genres.data });
     } catch (err) {
         console.log('Error in getting genres: ', err);
