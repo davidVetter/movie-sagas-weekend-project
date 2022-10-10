@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import './AddMovieForm.css'
 
 function AddMovieForm() {
     const [title, setTitle] = useState('');
@@ -74,22 +75,23 @@ function AddMovieForm() {
 
     return (
         <div className="addMovieForm">
-            <h2>Add Movie Form</h2>
+            <div className="addMovieInnerDiv">
+            <h2 className="addFormHeader">Add Movie Form</h2>
             <form>
-            <input onChange={e => setTitle(e.target.value)} placeholder='Title' value={title} required/><br />
-            <input onChange={e => setPosterUrl(e.target.value)} placeholder='Poster URL' value={posterUrl} required/><br />
+            <input onChange={e => setTitle(e.target.value)} placeholder='Title' value={title} required/><br /><br />
+            <input onChange={e => setPosterUrl(e.target.value)} placeholder='Poster URL' value={posterUrl} required/><br /><br />
             <textarea onChange={e => setDescription(e.target.value)} placeholder='Description' value={description} required/><br />
+            <p className="selectGenreMsg">Select any genres that apply</p>
             {genres.length > 0 && <select onChange={(e) => handleGenres(e)} required>
                                     <option>Please select one...</option>
                                     {genres.map((genre, i) => <option value={genre.id} key={i}>{genre.name}</option>)}
-                                </select>}<br />
-            <button onClick={handleSave}>Save</button>
+                                </select>}<br /><br />
+            <button onClick={handleSave}>Save</button>&nbsp;
             <button onClick={handleCancel}>Cancel</button>
-            <p>{title}</p>
-            <p>{posterUrl}</p>
-            <p>{description}</p>
+            {movieGenre.length > 0 && <h3>Selected genres:</h3>}
             {movieGenre.length > 0 && movieGenre.map((genre, index) => <p key={index}>{genres[genre-1].name}</p>)}
             </form>
+            </div>
         </div>
     )
 }

@@ -1,0 +1,103 @@
+.editTextArea {
+    width: 100%;
+    min-width: 50%;
+    min-height: 45%;
+    height: 5em;
+    padding: 5px;
+}
+
+.editDescriptionDiv {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+
+.innerEditDescription {
+    width: 90%;
+    margin: 0 auto;
+    min-width: 60%;
+    max-width: 90%;
+}
+
+.descriptionHead {
+    text-align: left;
+    margin: 0 auto;
+    width: 92%;
+    color: #571f4e;
+    font-weight: 600;
+}
+
+label {
+    color: #571f4e;
+    font-weight: 600;
+}
+
+.editTitleInput {
+    margin-bottom: 10px;
+    width: 60%;
+    min-width: 40%;
+}
+
+.editImg {
+    border: 3px inset #571f4e;
+    width: 30%;
+}
+
+.genreDiv {
+    padding: 3px 5px;
+}
+
+.genreInnerDiv {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+    margin: 5px auto;
+    color: #5d5179;
+    border: 2px solid #a2faa3;
+    border-radius: 7px;
+    /* padding: 0.1em 0.8em; */
+}
+
+.genreEdit {
+    margin: 3px;
+}
+
+.genreHeaders {
+    padding: 0;
+    margin: 3px;
+}
+
+@media only screen and (max-width: 700px) {
+    .editImg {
+        width: 50%;
+    }
+  }
+
+@media only screen and (max-width: 550px) {
+    .genreInnerDiv {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        margin: 5px auto;
+        color: #5d5179;
+        border: 2px solid #a2faa3;
+        border-radius: 7px;
+    }
+    h4 {
+        margin: 5px;
+    }
+
+    .editImg {
+        width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    .genreInnerDiv {
+        flex-direction: column;
+        margin: 0 auto;
+    }
+  }

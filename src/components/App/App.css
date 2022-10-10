@@ -9,6 +9,8 @@
 body {
   margin: 0 auto;
   overflow-x: hidden;
+  background-color: #92c9b1;
+  color: #4f759b;
 }
 
 .App-header {
@@ -19,8 +21,28 @@ body {
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 8vw;
+  margin: 25px auto;
+  animation: colorChange infinite 7s;
+  animation-fill-mode: forwards;
+  border-bottom: 5px solid #4f759b;
 }
+
+@keyframes colorChange {
+  0% {
+    color: rgba(162, 250, 163);
+    text-shadow: 0 0 10px rgba(211, 208, 203, 1);
+  }
+  50% {
+    color: rgba(146, 201, 177);
+    text-shadow: 0 0 10px rgba(162, 250, 163);
+  }
+  100% {
+    color: rgba(162, 250, 163);
+    text-shadow: 0 0 10px rgba(211, 208, 203, 1);
+  }
+}
+
 
 .App-intro {
   font-size: large;
@@ -30,6 +52,58 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #a2faa3;
+}
+
+.navBtn {
+  width: fit-content;
+  word-break: keep-all;
+  padding: 5px;
+}
+
+.navBtn:hover {
+  background-color: #5d5179;
+  color: #92c9b1;
+  box-shadow: 0 0 4px #571f4e;
+}
+
+button {
+  background-color: #4f759b;
+  border: 2px outset #5d5179;
+  color: #a2faa3;
+  padding: 3px;
+  border-radius: 7px;
+  font-weight: 700;
+  box-shadow: -2px -2px 5px #a2faa3, 2px 2px 5px #571f4e;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #a2faa3;
+  color: #4f759b;
+  border: 2px inset #5d5179;
+  box-shadow: inset -2px -2px 5px #5d5179, inset 2px 2px 5px #92c9b1;
+  cursor: pointer;
+}
+
+input, textarea {
+  border-radius: 7px;
+  padding: 10px;
+  width: 70%;
+}
+
+select {
+  width: 50%
+}
+
+textarea {
+  max-width: 90%;
+  min-width: 60%;
+  min-height: 25%;
+  margin: auto auto;
 }
 
 .mainSection {
@@ -45,4 +119,22 @@ body {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@media only screen and (max-width: 750px) {
+  .App-title {
+    font-size: 10vw;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .App-title {
+    font-size: 13vw;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .App-title {
+    font-size: 15vw;
+  }
 }

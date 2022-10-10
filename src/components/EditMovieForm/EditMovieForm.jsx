@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import './EditMovieForm.css'
 
 function EditMovieForm() {
     const movie = useSelector((store) => store.singleMovie);
@@ -72,20 +73,26 @@ function EditMovieForm() {
         based on if there is a movie currently in the singleMovie store */}
         {movie.length > 0 ? (
           <div key={movie[0].id} className="movieEditInnerDiv">
-            <label>Title:
-            <input value={title || movie[0].title} onChange={e => setTitle(e.target.value)}/>
+            <label>Title:&nbsp;
+            <input className='editTitleInput' value={title || movie[0].title} onChange={e => setTitle(e.target.value)}/>
             </label><br />
-            <img src={movie[0].poster} alt={movie[0].title} />
+            <img className="editImg" src={movie[0].poster} alt={movie[0].title} />
             {/* Displays all genres for the movie if there is more than one */}
             <div className="genreDiv">
-              {movie.map((genre) => {
-                return <h4 key={genre.id}>{genre.name}</h4>;
-              })}
+                <div className="genreInnerDiv">
+                {movie.map((genre) => {
+                    return <h4 className="genreEdit" key={genre.id}>{genre.name}</h4>;
+                })}
+                </div>
             </div>
-            <label>Description:
-            <textarea value={description || movie[0].description} onChange={e => setDescription(e.target.value)}></textarea>
-            </label><br />
-            <button onClick={handleSave}>Save</button>
+            <div className="editDescriptionDiv">
+            <div className="innerEditDescription">
+            <p className="descriptionHead">Description:</p>
+            <textarea className='editTextArea'value={description || movie[0].description} onChange={e => setDescription(e.target.value)}></textarea>
+            </div>
+            </div>
+            <br />
+            <button onClick={handleSave}>Save</button>&nbsp;
             <button onClick={handleCancel}>Cancel</button>
           </div>
         ) : (
