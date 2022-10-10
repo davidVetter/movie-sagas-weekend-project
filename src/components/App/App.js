@@ -8,20 +8,24 @@ import EditMovieForm from '../EditMovieForm/EditMovieForm';
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <h1 className='App-title'>Featured Flix</h1>
       <Router> 
+        <div className='navlinks'>
           <NavLink
             to="/"
             exact
+            className='navBtn'
           >
             Home
-          </NavLink>&nbsp;
+          </NavLink>&nbsp;|&nbsp;
           <NavLink
             to="/addmovie"
             exact
+            className='navBtn'
           >
             Add Movie
-          </NavLink>        
+          </NavLink>  
+        </div>      
         <Route path="/" exact>
           <MovieList />
         </Route>

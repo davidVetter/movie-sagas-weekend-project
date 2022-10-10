@@ -33,6 +33,7 @@ function* fetchAllMovies() {
         
 }
 
+// This function will get a single movie by movie id from the database
 function* fetchMovieById(action) {
     try {
         const movie = yield axios.get(`/api/movie/${action.payload}`);
@@ -43,6 +44,7 @@ function* fetchMovieById(action) {
     }
 }
 
+// This saga will add a new movie to the database
 function* addMovie(action) {
     try {
         console.log(action.payload);
@@ -53,6 +55,7 @@ function* addMovie(action) {
     }
 }
 
+// this saga will update a movie's title and description
 function* updateMovie(action) {
     try {
         console.log('this is action.payload for updateMovie: ', action.payload);
@@ -91,6 +94,7 @@ const movies = (state = [], action) => {
     }
 }
 
+// reducer for storing the single movies being used for the detail page
 const singleMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAIL_MOVIE':

@@ -1,0 +1,65 @@
+.addMovieForm {
+    background-color: #a2faa3;
+    border-top-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    padding: 10em;
+    margin: 1%;
+}
+
+.addMovieInnerDiv {
+    padding: 15px;
+    margin: 5%;
+}
+
+.addFormHeader {
+    color: #5d5179;
+    font-size: 3em;
+    margin: 10% 3%;
+}
+
+@media only screen and (max-width: 700px) {
+    .addMovieForm {
+        border-radius: 0%;
+        margin: 10px 0 0;
+        padding: 0;
+    }
+
+    .addFormHeader{
+        font-size: 2.5em;
+        background-color: #5d5179;
+        color: #a2faa3;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .addMovieInnerDiv {
+        padding: 5px;
+        margin: 15px;
+    }
+
+    input, textarea, select {
+        width: 80%;
+    }
+    input {
+        margin: 0 auto;
+        max-width: 95%;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    input, textarea, select {
+        width: 90%;
+    }
+    input {
+        margin: 0 auto;
+        max-width: 95%;
+    }
+    .addMovieForm {
+        padding: 0;
+        margin: 0;
+    }
+    .addMovieInnerDiv {
+        padding: 0px;
+        margin: 0;
+    }
+  }

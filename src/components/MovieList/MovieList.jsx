@@ -21,13 +21,13 @@ function MovieList() {
     // each img can be clicked and the user moved to that movie's details page
     return (
         <main className='mainSection'>
-            <h1>MovieList</h1>
+            <h1>Featuring:</h1>
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <div key={movie.id} >
+                        <div key={movie.id} className="imgCard">
                             <h3>{movie.title}</h3>
-                            <img onClick={() => handleClick(movie.id)}src={movie.poster} alt={movie.title}/>
+                            <img className="posterImg"onClick={() => handleClick(movie.id)}src={movie.poster} alt={movie.title}/>
                         </div>
                     );
                 })}
