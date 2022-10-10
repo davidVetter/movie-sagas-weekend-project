@@ -13,21 +13,22 @@ function EditMovieForm() {
     // allows reading of the current url
     let location = useLocation();
 
-    // This keeps movieId current if the user types a new id
-    // in the browser address bar and presses enter
     useEffect(() => {
         // console.log('this is location: ', location.pathname);
         // uses reg exp to search string for any number characters and stores
         // them in "id" variable
         let id = location.pathname.match(/\d+/g);
         // console.log('this is id: ', Number(id));
+        // get the movie data for the movie id in the url
         dispatch({ type: 'FETCH_MOVIE_BY_ID', payload: id});
+        // set local state to the movie in the single movie store
+        // if one is currently in the store
         if (movie.length > 0) {
         setTitle(movie[0].title);
         setDescription(movie[0].description);
         }
         // console.log('this is movie after a url change: ', movie);
-    },[location.pathname]) // this useEffect runs whenever the url is changed
+    },[location.pathname]) // run function on url change
 
     // Handles when save button is clicked
     // validates title and description
@@ -35,6 +36,8 @@ function EditMovieForm() {
     // entry in the database based on movie id
     // clears local state and moves user to home page
     const handleSave = () => {
+        // This uses the store if local store state is cleared by
+        // the user refreshing
         let movieTitle = title;
         let movieDescription = description;
         if (!title.trim()) {
@@ -43,6 +46,7 @@ function EditMovieForm() {
         if (!description.trim()) {
             movieDescription = movie[0].description;
         }
+        // sends update info update movie saga
         dispatch({
             type: 'UPDATE_MOVIE',
             payload: {
@@ -51,8 +55,10 @@ function EditMovieForm() {
                 id: location.pathname.match(/\d+/g)
             }
         });
+        // clear local state
         setTitle('');
         setDescription('');
+        // move user back to movie list page
         history.push('/');
     }
 
@@ -67,29 +73,47 @@ function EditMovieForm() {
     return (
       <div className="movieEditDiv">
         <h2>Edit Page</h2>
-        {console.log("This is movie: ", movie, 'This is title: ', title)}
-        {console.log('This is description: ', description)}
+        {console.log("This is movie: ", movie, "This is title: ", title)}
+        {console.log("This is description: ", description)}
         {/* Conditionally renders the details and inputs of the movie to edit
         based on if there is a movie currently in the singleMovie store */}
         {movie.length > 0 ? (
           <div key={movie[0].id} className="movieEditInnerDiv">
-            <label>Title:&nbsp;
-            <input className='editTitleInput' value={title || movie[0].title} onChange={e => setTitle(e.target.value)}/>
-            </label><br />
-            <img className="editImg" src={movie[0].poster} alt={movie[0].title} />
+            <label>
+              Title:&nbsp;
+              <input
+                className="editTitleInput"
+                value={title || movie[0].title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </label>
+            <br />
+            <img
+              className="editImg"
+              src={movie[0].poster}
+              alt={movie[0].title}
+            />
             {/* Displays all genres for the movie if there is more than one */}
             <div className="genreDiv">
-                <div className="genreInnerDiv">
+              <div className="genreInnerDiv">
                 {movie.map((genre) => {
-                    return <h4 className="genreEdit" key={genre.id}>{genre.name}</h4>;
+                  return (
+                    <h4 className="genreEdit" key={genre.id}>
+                      {genre.name}
+                    </h4>
+                  );
                 })}
-                </div>
+              </div>
             </div>
             <div className="editDescriptionDiv">
-            <div className="innerEditDescription">
-            <p className="descriptionHead">Description:</p>
-            <textarea className='editTextArea'value={description || movie[0].description} onChange={e => setDescription(e.target.value)}></textarea>
-            </div>
+              <div className="innerEditDescription">
+                <p className="descriptionHead">Description:</p>
+                <textarea
+                  className="editTextArea"
+                  value={description || movie[0].description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
             </div>
             <br />
             <button onClick={handleSave}>Save</button>&nbsp;

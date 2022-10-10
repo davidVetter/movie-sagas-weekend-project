@@ -16,6 +16,8 @@ function DetailsPage() {
         // console.log('this is location: ', location.pathname);
         // uses reg exp to search string for any number characters and stores
         // them in "id" variable
+        // reg exp courtesy of Geeks for Geeks
+        // https://www.geeksforgeeks.org/extract-a-number-from-a-string-using-javascript/
         let id = location.pathname.match(/\d+/g);
         // console.log('this is id: ', Number(id));
         dispatch({ type: 'FETCH_MOVIE_BY_ID', payload: id});
@@ -25,6 +27,7 @@ function DetailsPage() {
     return (
       <div className="movieDetailDiv">
         {console.log("This is movie: ", movie)}
+        {/* Conditionally render movie details or message that results can't be found */}
         {movie.length > 0 ? (
           <div key={movie[0].id} className="movieDetailInnerDiv">
             <h3 className="movieTitleHeading">{movie[0].title}</h3>

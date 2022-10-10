@@ -12,7 +12,7 @@ function AddMovieForm() {
     const genres = useSelector(store => store.genres);
     const history = useHistory();
     const dispatch = useDispatch();
-
+    // useEffect to fetch genres on page load
     useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' })
     }, []);
@@ -72,27 +72,60 @@ function AddMovieForm() {
         // console.log('this is arr: ', arr);
         setMovieGenre(arr); // updates local state with new array of genres
     }
-
+    // Renders inputs for adding a movie to the database
+    // User is able to save (add movie to db) and be returned to the movie list
+    // or 'cancel' and have inputs cleared and user is returned to the home page
     return (
-        <div className="addMovieForm">
-            <div className="addMovieInnerDiv">
-            <h2 className="addFormHeader">Add Movie Form</h2>
-            <form>
-            <input onChange={e => setTitle(e.target.value)} placeholder='Title' value={title} required/><br /><br />
-            <input onChange={e => setPosterUrl(e.target.value)} placeholder='Poster URL' value={posterUrl} required/><br /><br />
-            <textarea onChange={e => setDescription(e.target.value)} placeholder='Description' value={description} required/><br />
+      <div className="addMovieForm">
+        <div className="addMovieInnerDiv">
+          <h2 className="addFormHeader">Add Movie Form</h2>
+          <form>
+            <input
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title"
+              value={title}
+              required
+            />
+            <br />
+            <br />
+            <input
+              onChange={(e) => setPosterUrl(e.target.value)}
+              placeholder="Poster URL"
+              value={posterUrl}
+              required
+            />
+            <br />
+            <br />
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              value={description}
+              required
+            />
+            <br />
             <p className="selectGenreMsg">Select any genres that apply</p>
-            {genres.length > 0 && <select onChange={(e) => handleGenres(e)} required>
-                                    <option>Please select one...</option>
-                                    {genres.map((genre, i) => <option value={genre.id} key={i}>{genre.name}</option>)}
-                                </select>}<br /><br />
+            {genres.length > 0 && (
+              <select onChange={(e) => handleGenres(e)} required>
+                <option>Please select one...</option>
+                {genres.map((genre, i) => (
+                  <option value={genre.id} key={i}>
+                    {genre.name}
+                  </option>
+                ))}
+              </select>
+            )}
+            <br />
+            <br />
             <button onClick={handleSave}>Save</button>&nbsp;
             <button onClick={handleCancel}>Cancel</button>
             {movieGenre.length > 0 && <h3>Selected genres:</h3>}
-            {movieGenre.length > 0 && movieGenre.map((genre, index) => <p key={index}>{genres[genre-1].name}</p>)}
-            </form>
-            </div>
+            {movieGenre.length > 0 &&
+              movieGenre.map((genre, index) => (
+                <p key={index}>{genres[genre - 1].name}</p>
+              ))}
+          </form>
         </div>
-    )
+      </div>
+    );
 }
 export default AddMovieForm;
