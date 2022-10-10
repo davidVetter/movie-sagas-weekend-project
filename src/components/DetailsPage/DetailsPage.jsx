@@ -66,8 +66,14 @@ function DetailsPage() {
             </div>
             <div className="genreDiv">
               <div className="genreInnerDiv">
-                {movie.map((genre) => {
-                  return <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>;
+                {movie.map((genre, index) => {
+                  return (
+                    <span className="genreSpan">
+                        {console.log('this is index: ', index)}
+                        {index > 0 && <p>|</p>}
+                        <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>
+                    </span>
+                    );
                 })}
               </div>
             </div>
