@@ -122,10 +122,18 @@ function EditMovieForm() {
               <div className="genreInnerDiv">
                 {movie.map((genre, index) => {
                   return (
-                    <span key={index}className="genreSpan">
-                        {console.log('this is index: ', index)}
-                        {index > 0 && <p>|</p>}
-                        <h4 onClick={() => handleRemove(genre.movie_id, genre.genre_id)} className="genreHeaders" key={genre.id}>{genre.name}❌</h4>
+                    <span key={index} className="genreSpan">
+                      {console.log("this is index: ", index)}
+                      {index > 0 && <p>|</p>}
+                      <h4
+                        onClick={() =>
+                          handleRemove(genre.movie_id, genre.genre_id)
+                        }
+                        className="genreHeaders"
+                        key={genre.id}
+                      >
+                        {genre.name}&nbsp;❌
+                      </h4>
                     </span>
                   );
                 })}
