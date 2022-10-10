@@ -68,7 +68,7 @@ function DetailsPage() {
               <div className="genreInnerDiv">
                 {movie.map((genre, index) => {
                   return (
-                    <span className="genreSpan">
+                    <span key={index} className="genreSpan">
                         {console.log('this is index: ', index)}
                         {index > 0 && <p>|</p>}
                         <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>

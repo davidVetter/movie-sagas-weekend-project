@@ -96,11 +96,13 @@ function EditMovieForm() {
             {/* Displays all genres for the movie if there is more than one */}
             <div className="genreDiv">
               <div className="genreInnerDiv">
-                {movie.map((genre) => {
+                {movie.map((genre, index) => {
                   return (
-                    <h4 className="genreEdit" key={genre.id}>
-                      {genre.name}
-                    </h4>
+                    <span key={index}className="genreSpan">
+                        {console.log('this is index: ', index)}
+                        {index > 0 && <p>|</p>}
+                        <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>
+                    </span>
                   );
                 })}
               </div>
