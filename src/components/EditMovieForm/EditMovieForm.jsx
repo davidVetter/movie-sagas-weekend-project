@@ -70,6 +70,30 @@ function EditMovieForm() {
         history.push('/');
     }
 
+    const handleRemove = (movieid, genreid) => {
+        swal({ // Sweet alert for delete confirmation
+            title: "Remove Genre?",
+            text: "Are you sure you want to remove this genre? (cannot be undone)",
+            buttons: {
+              cancel: true,
+              confirm: {
+                text: "Remove",
+                className: "redBtn",
+              },
+            },
+          }).then((result) => {
+            if (result) {
+                dispatch({
+                    type: "REMOVE_GENRE",
+                    payload: {
+                        movieid,
+                        genreid
+                    }
+                });
+            }
+          });
+    }
+
     return (
       <div className="movieEditDiv">
         <h2>Edit Page</h2>
@@ -101,7 +125,7 @@ function EditMovieForm() {
                     <span key={index}className="genreSpan">
                         {console.log('this is index: ', index)}
                         {index > 0 && <p>|</p>}
-                        <h4 className="genreHeaders" key={genre.id}>{genre.name}</h4>
+                        <h4 onClick={() => handleRemove(genre.movie_id, genre.genre_id)} className="genreHeaders" key={genre.id}>{genre.name}❌</h4>
                     </span>
                   );
                 })}

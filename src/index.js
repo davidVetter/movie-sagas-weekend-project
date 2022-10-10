@@ -17,6 +17,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIE_BY_ID', fetchMovieById);
     yield takeEvery('ADD_MOVIE', addMovie);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
+    yield takeEvery('REMOVE_GENRE', removeGenre);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }
 
@@ -67,6 +68,16 @@ function* updateMovie(action) {
         yield put({ type: 'FETCH_MOVIES' });
     } catch (err) {
         console.log('error in PUT movie ', err);
+    }
+}
+
+function* removeGenre(action) {
+    try {
+        console.log('This is action.payload in removeCategory: ', action.payload);
+        yield axios.delete(`api/movie/${action.payload.movieid}/${action.payload.genreid}`);
+        yield put({ type: 'FETCH_MOVIE_BY_ID', payload: action.payload.movieid });
+    } catch (err) {
+        console.log('Error in DELETE movies: ', err);
     }
 }
 

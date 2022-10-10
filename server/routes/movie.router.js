@@ -92,4 +92,16 @@ router.post('/', (req, res) => {
   })
 })
 
+router.delete('/:movieid/:genreid', (req, res) => {
+  const query = `DELETE FROM "movies_genres" WHERE "movie_id"=$1 AND "genre_id"=$2;`;
+
+  pool.query(query, [req.params.movieid, req.params.genreid])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error in DELETE category: ', error);
+      });
+});
+
 module.exports = router;
