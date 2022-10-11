@@ -107,6 +107,9 @@
         margin: 0;
     
     }
+    .imgCard {
+        width: 85%;
+    }
   }
 
   @media only screen and (max-width: 370px) {
@@ -118,6 +121,9 @@
         height: auto;
         margin: 0;
     
+    }
+    .imgCard {
+        width: 95%;
     }
   }
 
