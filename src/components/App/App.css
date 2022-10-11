@@ -12,6 +12,7 @@ body {
   background-color: #92c9b1;
   color: #4f759b;
   font-family: 'I Missed You', sans-serif;
+  min-width: 200px;
 }
 
 .App-header {

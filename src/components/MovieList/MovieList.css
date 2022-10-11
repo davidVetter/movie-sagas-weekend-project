@@ -21,7 +21,7 @@
     margin-bottom: 10px;
     box-shadow: 0 0 10px #cbbaed, 3px 3px 5px black;
     cursor: pointer;
-    width: 300px;
+    width: 225px;
 }
 
 .imgCard:hover {
@@ -36,21 +36,39 @@
 
 }
 
-@media only screen and (max-width: 1230px) {
-    .movies {
-        grid-template-columns: auto auto auto auto;
-        column-gap: 10px;
-        width: 100%;
-        padding: 5px;
+@media only screen and (max-width: 1370px) {
+    .imgCard {
+        width: 225px;
     }
   }
 
-  @media only screen and (max-width: 835px) {
+@media only screen and (max-width: 1230px) {
+    .movies {
+        grid-template-columns: auto auto auto auto;
+        column-gap: 5px;
+        width: 100%;
+        padding: 5px;
+    }
+    .imgCard {
+        width: 225px;
+    }
+  }
+
+  @media only screen and (max-width: 970px) {
+    .imgCard {
+        width: 205px;
+    }
+  }
+
+  @media only screen and (max-width: 880px) {
     .movies {
         grid-template-columns: auto auto auto;
         box-sizing: border-box;
         column-gap: 0px;
         row-gap: 15px;
+    }
+    .imgCard {
+        width: 200px;
     }
   }
 
@@ -71,7 +89,13 @@
     }
   }
 
-@media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 630px) {
+    .imgCard {
+        width: 170px;
+    }
+  }
+
+@media only screen and (max-width: 540px) {
     .movies {
         grid-template-columns: auto auto;
         width: 100%;
@@ -85,12 +109,12 @@
     }
   }
 
-  @media only screen and (max-width: 300px) {
+  @media only screen and (max-width: 370px) {
     .movies {
         grid-template-columns: auto;
     }
     .posterImg {
-        width: 100%;
+        width: 95%;
         height: auto;
         margin: 0;
     
